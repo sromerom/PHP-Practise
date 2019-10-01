@@ -30,6 +30,7 @@
             <!-- <form method="POST" action="orderingList.php"> -->
             <form method="POST" action="index.php">
                 <select name="opcionsCercador">
+                    <option value="default">default</option>
                     <option value="az">Ordenat per A-Z</option>
                     <option value="za">Ordenat per Z-A</option>
                     <option value="data">Ordenat per data</option>
@@ -39,20 +40,57 @@
             <?php
             $option = isset($_POST['opcionsCercador']);
             if ($option) {
+                $x = $_POST['opcionsCercador'];
                 echo "<h1>" . $_POST['opcionsCercador'] . "</h1>";
+                include("conexion.php");
+                $queryDefault = "SELECT * FROM llibres";
+                $queryAZ = "SELECT * FROM llibres ORDER BY titol";
+                $queryZA = "SELECT * FROM llibres ORDER BY titol desc";
+                $queryData = "SELECT * FROM llibres ORDER BY data_afegit";
+                $resultatGlobal = "DEFAULT";
 
-                if ($option == "az") {
-                    echo "<p>Estas ordenandor de A a la Z</p>";
+
+
+                if ($x == "az") {
+                    echo "<p>Estas ordenando de A a la Z</p>";
+                    //$resultatAZ = mysqli_query($connexio, $queryAZ);
+                    $resultatGlobal = mysqli_query($connexio, $queryAZ);
+                } else if ($x == "za") {
+                    echo "<p>Estas ordenando de Z a la A</p>";
+                    //$resultatZA = mysqli_query($connexio, $queryZA);
+                    $resultatGlobal = mysqli_query($connexio, $queryZA);
+                } else if ($x == "data") {
+                    echo "<p>Estas ordenando por fecha</p>";
+                    //$resultatData = mysqli_query($connexio, $queryData);
+                    $resultatGlobal = mysqli_query($connexio, $queryData);
+                } else {
+                    $resultatGlobal = mysqli_query($connexio, $queryDefault);
                 }
-            } else {
-                echo "task option is required";
-                exit;
-            }
-            ?>
-        </section>
+                ?>
+                <section id="llistat">
+                    <ul>
+                        <?php
+                            while ($row = mysqli_fetch_array($resultatGlobal)) { ?>
+                            <li>
+                                <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
+                                <div class="under">
+                                    <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
+                                </div>
+                            </li>
+
+                    <?php }
+                    } else {
+                        echo "task option is required";
+                        exit;
+                    }
+                    ?>
+                    </ul>
+                </section>
+                <!--
         <section id="llistat">
             <ul>
                 <?php
+                /*
                 include("conexion.php");
                 $queryy = "SELECT * FROM llibres";
                 $resultatt = mysqli_query($connexio, $queryy);
@@ -67,20 +105,11 @@
 
                 <?php }
                 mysqli_close($connexio);
+                */
                 ?>
             </ul>
-            <!-- 
-            <ul>
-                <li><img src="http://www.esliceu.com/wp-content/uploads/2017/01/logo43434.gif" alt=""></li>
-                <li><img src="http://www.esliceu.com/wp-content/uploads/2017/01/logo43434.gif" alt=""></li>
-                <li><img src="http://www.esliceu.com/wp-content/uploads/2017/01/logo43434.gif" alt=""></li>
-                <li><img src="http://www.esliceu.com/wp-content/uploads/2017/01/logo43434.gif" alt=""></li>
-                <li><img src="http://www.esliceu.com/wp-content/uploads/2017/01/logo43434.gif" alt=""></li>
-                <li><img src="http://www.esliceu.com/wp-content/uploads/2017/01/logo43434.gif" alt=""></li>
-            </ul>
-        -->
         </section>
-
+        -->
     </main>
     <footer>
         <section class="container">
