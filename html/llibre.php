@@ -67,13 +67,14 @@
 
                 echo '<h3>Data que s ha afegit :</h3>';
                 echo '<p>'. $fila['data_afegit'] . '</p><br>';
-
             }
         } else {
             echo 'Error, problema per aconseguir el ID del llibre.';
         }
         //mysqli_close($connexio);
         ?>
+        <button name="seguent">seguent</button>
+        <button name="enrere">Enrere</button>
     </main>
     <footer>
         <section class="container">
