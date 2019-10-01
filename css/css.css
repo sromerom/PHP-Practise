@@ -1,3 +1,5 @@
+/* GLOBAL */
+
 * {
     padding: 0;
     margin: 0;
@@ -5,24 +7,17 @@
 
 }
 
-
-a {
-    text-decoration: none;
+main {
+    margin-bottom: 5%;
 }
+
+/* MENU */
 header { 
     background-color: black;
     margin-bottom: 5%; 
     padding-bottom: 2%;
     padding-top: 2%;
 }
-main {
-    margin-bottom: 5%;
-}
-/*
-@media (min-width: 360px) {
-    
-}
-*/
 
 #menu {
     display: flex;
@@ -61,26 +56,32 @@ main {
     color:red;
 }
 
+/* LLISTAT D'ELEMENTS */
 
 #llistat ul {
     display: flex;
+    flex-wrap: wrap;
+}
+
+#llistat ul li {
+    flex-basis: 50%;
+
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    list-style-type: none;
-    margin-left: 21%;
-    margin-right: 21%;
-}
-#llistat ul li {
-    border: 1px solid black;
-    flex-basis: 33.33%;
-
+    justify-content: center;
 }
 
+#llistat ul li .under {
+    flex-basis: 100%;
+    text-align: center;
+}
 
-#llistat ul li img{
-    margin: auto;
+#llistat ul li a img {
     width: 300px;
+    height: 450px;
 }
+/* FOOTER */
 footer {
     padding: 15px;
 
@@ -120,3 +121,21 @@ footer {
 }
 
 
+/* FORMULARI */
+
+#formularis {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.disFormulari input {
+    width: 300px;
+
+}
+
+.disFormulari label {
+    font-weight: bold;
+}
