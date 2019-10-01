@@ -27,12 +27,28 @@
     </header>
     <main>
         <section id="cercador">
-            <select>
-                <option value="default">Default</option>
-                <option value="az">Ordena A-Z</option>
-                <option value="za">Ordena Z-A</option>
-                <option value="data">Ordena per data</option>
-            </select>
+            <!-- <form method="POST" action="orderingList.php"> -->
+            <form method="POST" action="index.php">
+                <select name="opcionsCercador">
+                    <option value="az">Ordenat per A-Z</option>
+                    <option value="za">Ordenat per Z-A</option>
+                    <option value="data">Ordenat per data</option>
+                </select>
+                <input type="submit" value="Submit the form" />
+            </form>
+            <?php
+            $option = isset($_POST['opcionsCercador']);
+            if ($option) {
+                echo "<h1>" . $_POST['opcionsCercador'] . "</h1>";
+
+                if ($option == "az") {
+                    echo "<p>Estas ordenandor de A a la Z</p>";
+                }
+            } else {
+                echo "task option is required";
+                exit;
+            }
+            ?>
         </section>
         <section id="llistat">
             <ul>
