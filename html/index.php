@@ -55,6 +55,30 @@
         $option = isset($_POST['opcionsCercador']);
         $search = isset($_POST['search']);
 
+        if ($search) {
+            $inputCerca = $_POST['search'];
+            echo "<p>" . $inputCerca . "</p>";
+            $queryCerca = "SELECT * FROM llibres WHERE titol='$inputCerca'";
+            $resultatCerca = mysqli_query($connexio, $queryCerca);
+
+            ?>
+            <section id="llistat">
+                <ul>
+                    <?php
+                        while ($row = mysqli_fetch_array($resultatCerca)) { ?>
+                        <li>
+                            <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
+                            <div class="under">
+                                <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
+                            </div>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </section>
+        <?php
+
+        }
+        
         if ($option) {
             $x = $_POST['opcionsCercador'];
 
@@ -94,6 +118,7 @@
             </section>
         <?php
         } else {
+            echo "La primera vez se situaria aqui";
             $queryDefault = "SELECT * FROM llibres";
             $resultatDefault = mysqli_query($connexio, $queryDefault);
             ?>
@@ -112,13 +137,6 @@
             </section>
         <?php
         }
-
-        if ($search) {
-            $x2 = $_POST['search'];
-            echo "<p>" . $x2 . "</p>";
-        }
-
-
         ?>
     </main>
     <footer>
