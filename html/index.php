@@ -30,13 +30,24 @@
             <!-- <form method="POST" action="orderingList.php"> -->
             <form method="POST" action="index.php">
                 <select name="opcionsCercador">
-                    <!-- <option value="default">default</option> -->
-                    <option value="az">Ordenat per A-Z</option>
-                    <option value="za">Ordenat per Z-A</option>
-                    <option value="data">Ordenat per data</option>
+                    <!-- <option value="0">Selecciona una opció per filtrar</option> -->
+                    <?php
+                    $arrayOpcions = array(1 => "Ordenat per A-Z", "Ordenat per Z-A", "Ordenat per data");
+
+                    foreach ($arrayOpcions as $key => $value) {
+                        if ($_POST['opcionsCercador'] == $key) {
+                            echo "<option value='" . $key . "' selected>" . $value . "</option>";
+                        } else {
+                            echo "<option value='" . $key . "'>" . $value . "</option>";
+                        }
+                    }
+                    ?>
+                    <!-- <option value="az">Ordenat per A-Z</option> -->
+                    <!-- <option value="za">Ordenat per Z-A</option> -->
+                    <!-- <option value="data">Ordenat per data</option> -->
                 </select>
                 <input type="search" name="search">
-                <input type="submit" value="Submit the form" />
+                <input type="submit" value="Cerca">
             </form>
         </section>
         <?php
@@ -46,6 +57,7 @@
 
         if ($option) {
             $x = $_POST['opcionsCercador'];
+
             echo "<h1>" . $_POST['opcionsCercador'] . "</h1>";
             $queryAZ = "SELECT * FROM llibres ORDER BY titol";
             $queryZA = "SELECT * FROM llibres ORDER BY titol desc";
@@ -53,15 +65,15 @@
 
 
 
-            if ($x == "az") {
+            if ($x == 1) {
                 //echo "<p>Estas ordenando de A a la Z</p>";
                 //$resultatAZ = mysqli_query($connexio, $queryAZ);
                 $resultatGlobal = mysqli_query($connexio, $queryAZ);
-            } else if ($x == "za") {
+            } else if ($x == 2) {
                 //echo "<p>Estas ordenando de Z a la A</p>";
                 //$resultatZA = mysqli_query($connexio, $queryZA);
                 $resultatGlobal = mysqli_query($connexio, $queryZA);
-            } else if ($x == "data") {
+            } else if ($x == 3) {
                 //echo "<p>Estas ordenando por fecha</p>";
                 //$resultatData = mysqli_query($connexio, $queryData);
                 $resultatGlobal = mysqli_query($connexio, $queryData);
@@ -98,12 +110,12 @@
                     <?php } ?>
                 </ul>
             </section>
-            <?php
+        <?php
         }
 
         if ($search) {
             $x2 = $_POST['search'];
-            echo "<p>". $x2 ."</p>";
+            echo "<p>" . $x2 . "</p>";
         }
 
 
