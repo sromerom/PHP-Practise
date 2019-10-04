@@ -22,29 +22,30 @@
     /* CONSULTA A LA BASE DE DADES*/
 
     $where = "";
-    $ordenar =$_POST['opcionsCercador'];
-    $textCerca = $_POST['search'];
 
-    if(isset($_POST['cerca'])) {
-        if(empty($_POST['opcionsCercador'])) {
-            $where = "WHERE titol like '".$textCerca."%'";
-        } else if(empty($_POST['search'])) {
-            if($ordenar == 1) {
+    if (isset($_POST['cerca'])) {
+        $ordenar = $_POST['opcionsCercador'];
+        $textCerca = $_POST['search'];
+        
+        if (empty($_POST['opcionsCercador'])) {
+            $where = "WHERE titol like '" . $textCerca . "%'";
+        } else if (empty($_POST['search'])) {
+            if ($ordenar == 1) {
                 $where = "ORDER BY titol";
-            } else if($ordenar == 2) {
+            } else if ($ordenar == 2) {
                 $where = "ORDER BY titol DESC";
             } else {
                 $where = "ORDER BY data_afegit";
             }
         } else {
-            if($ordenar == 1) {
-                $where = "WHERE titol like '".$textCerca."%' ORDER BY titol";
+            if ($ordenar == 1) {
+                $where = "WHERE titol like '" . $textCerca . "%' ORDER BY titol";
                 //$where = "ORDER BY titol";
-            } else if($ordenar == 2) {
-                $where = "WHERE titol like '".$textCerca."%' ORDER BY titol DESC";
+            } else if ($ordenar == 2) {
+                $where = "WHERE titol like '" . $textCerca . "%' ORDER BY titol DESC";
                 //$where = "ORDER BY titol DESC";
             } else {
-                $where = "WHERE titol like '".$textCerca."%' ORDER BY data_afegit";
+                $where = "WHERE titol like '" . $textCerca . "%' ORDER BY data_afegit";
                 //$where = "ORDER BY data_afegit";
             }
         }
@@ -89,19 +90,19 @@
             </form>
         </section>
         <!-- CARREGAR LLISTA DINAMICA -->
-            <section id="llistat">
-                <ul>
-                    <?php
-                        while ($row = mysqli_fetch_array($resultatDefault)) { ?>
-                        <li>
-                            <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
-                            <div class="under">
-                                <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
+        <section id="llistat">
+            <ul>
+                <?php
+                while ($row = mysqli_fetch_array($resultatDefault)) { ?>
+                    <li>
+                        <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
+                        <div class="under">
+                            <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
+                        </div>
+                    </li>
+                <?php } ?>
+            </ul>
+        </section>
     </main>
     <footer>
         <section class="container">
