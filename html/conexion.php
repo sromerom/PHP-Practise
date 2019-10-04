@@ -1,10 +1,11 @@
 <?php
-$connexio = mysqli_connect(
-    'localhost',
-    'root',
-    '',
-    'Llibreria'
-);
+
+$host = "localhost";
+$usuari = "root";
+$password = "";
+$baseDades = "Llibreria";
+
+$connexio = mysqli_connect($host, $usuari, $password, $baseDades);
 
 /*
 if ($connexio->connect_errno) {

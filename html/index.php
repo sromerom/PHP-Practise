@@ -17,6 +17,15 @@
 
 <body>
     <?php
+    /*
+    session_start();
+    $usuari = $_SESSION['usuariSession'];
+
+    if (!isset($usuari)) {
+        header("Location: index.php");
+    }
+*/
+
     include("conexion.php");
 
     $despresQuery = "";
@@ -24,7 +33,7 @@
     if (isset($_POST['cerca'])) {
         $ordenar = $_POST['opcionsCercador'];
         $textCerca = $_POST['search'];
-        
+
         if (empty($_POST['opcionsCercador'])) {
             $despresQuery = "WHERE titol like '" . $textCerca . "%'";
         } else if (empty($_POST['search'])) {
@@ -56,6 +65,7 @@
             <ul>
                 <li><a href="../html/index.php" class="btn btn-info btn-lg">Inici</a></li>
                 <li><a href="../html/formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="../html/endLogin.php" class="btn btn-info btn-lg">Surt</a></li>
             </ul>
         </section>
     </header>
@@ -97,7 +107,7 @@
                             <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
                         </div>
                     </li>
-                <?php } 
+                <?php }
                 mysqli_close($connexio);
                 ?>
             </ul>

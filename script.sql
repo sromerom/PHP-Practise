@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS Llibreria;
 
 USE Llibreria;
 
-/*Creacio de les taules*/
+/****** CREACIO DE LES TAULES ******/
 CREATE TABLE llibres (
     id_llibre INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     titol VARCHAR(150) NOT NULL,
@@ -14,7 +14,20 @@ CREATE TABLE llibres (
     data_afegit DATE 
 );
 
-/* Creacio de les dades */
+CREATE TABLE usuaris (
+    id_usuari MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    nom VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    contrasenya VARCHAR(120) NOT NULL
+);
+
+
+/****** CREACIO DE LES DADES ******/
+
+INSERT INTO usuaris VALUES (1, 'Samuel', 'probandoLogin.esliceu.net', md5('hola'));
+
+
+
 INSERT INTO llibres VALUES (1, 'La Chica que vivio dos veces', 'David Lagercrantz', 'Toda gran historia merece un gran final. El cierre de una serie que ha vendido más de 100 millones de ejemplares en todo el mundo.
 Lisbeth Salander está preparada para la batalla final contra la única persona que, siendo idéntica a ella, es su opuesta en todo: su hermana Camilla. Pero esta vez, 
 Lisbeth tomará la iniciativa.Ha dejado atrás Estocolmo, lleva un nuevo peinado y se ha quitado los piercings. Podría pasar por una ejecutiva más. 
