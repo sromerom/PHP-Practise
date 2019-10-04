@@ -71,10 +71,13 @@
         } else {
             echo 'Error, problema per aconseguir el ID del llibre.';
         }
-        //mysqli_close($connexio);
+
+        $llibreDespres = $fila['id_llibre'] + 1;
+        $llibreAbans = $fila['id_llibre'] - 1;
+        echo '<a href="llibre.php?id_llibre=' . $llibreAbans . '">Enrere</a>';
+        echo '<a href="llibre.php?id_llibre=' . $llibreDespres . '">Següent</a>';
+        mysqli_close($connexio);
         ?>
-        <button name="seguent">seguent</button>
-        <button name="enrere">Enrere</button>
     </main>
     <footer>
         <section class="container">

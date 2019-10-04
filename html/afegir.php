@@ -15,6 +15,7 @@ if (isset($_POST['formulari'])) {
         die("Ha ocurrido un error :(");
     }
 
-    //header("Location: formulari.php");
+    header("Location: formulari.php");
 }
+mysqli_close($connexio);
 ?>

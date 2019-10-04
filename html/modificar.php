@@ -16,3 +16,5 @@ if (isset($_POST["id_llibreMod"])) {
 } else {
   echo 'Error al obtener el ID del llibre.';
 }
+mysqli_close($connexio);
+?>

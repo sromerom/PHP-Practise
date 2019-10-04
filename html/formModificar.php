@@ -69,7 +69,7 @@
             }
         }
 
-        //mysqli_close($connexio);
+        mysqli_close($connexio);
         ?>
     </main>
 </body>

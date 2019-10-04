@@ -8,11 +8,13 @@ if (isset($_POST['formulari2'])) {
     $query2 = "DELETE FROM llibres WHERE id_llibre = $id_llibre";
     $res2 = mysqli_query($connexio, $query2);
 
-    
+
 
     if (!$res2) {
         die("Ha ocurrido un error :(");
     }
 
-    //header("Location: formulari.php");
+    header("Location: formulari.php");
 }
+mysqli_close($connexio);
+?>

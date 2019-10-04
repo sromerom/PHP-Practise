@@ -19,40 +19,35 @@
     <?php
     include("conexion.php");
 
-    /* CONSULTA A LA BASE DE DADES*/
-
-    $where = "";
+    $despresQuery = "";
 
     if (isset($_POST['cerca'])) {
         $ordenar = $_POST['opcionsCercador'];
         $textCerca = $_POST['search'];
         
         if (empty($_POST['opcionsCercador'])) {
-            $where = "WHERE titol like '" . $textCerca . "%'";
+            $despresQuery = "WHERE titol like '" . $textCerca . "%'";
         } else if (empty($_POST['search'])) {
             if ($ordenar == 1) {
-                $where = "ORDER BY titol";
+                $despresQuery = "ORDER BY titol";
             } else if ($ordenar == 2) {
-                $where = "ORDER BY titol DESC";
+                $despresQuery = "ORDER BY titol DESC";
             } else {
-                $where = "ORDER BY data_afegit";
+                $despresQuery = "ORDER BY data_afegit";
             }
         } else {
             if ($ordenar == 1) {
-                $where = "WHERE titol like '" . $textCerca . "%' ORDER BY titol";
+                $despresQuery = "WHERE titol like '" . $textCerca . "%' ORDER BY titol";
                 //$where = "ORDER BY titol";
             } else if ($ordenar == 2) {
-                $where = "WHERE titol like '" . $textCerca . "%' ORDER BY titol DESC";
+                $despresQuery = "WHERE titol like '" . $textCerca . "%' ORDER BY titol DESC";
                 //$where = "ORDER BY titol DESC";
             } else {
-                $where = "WHERE titol like '" . $textCerca . "%' ORDER BY data_afegit";
+                $despresQuery = "WHERE titol like '" . $textCerca . "%' ORDER BY data_afegit";
                 //$where = "ORDER BY data_afegit";
             }
         }
     }
-
-    $queryDefault = "SELECT * FROM llibres $where";
-    $resultatDefault = mysqli_query($connexio, $queryDefault);
     ?>
 
     <header>
@@ -67,7 +62,7 @@
     <main>
         <section id="cercador">
             <!-- <form method="POST" action="orderingList.php"> -->
-            <form method="POST" action="index.php">
+            <form method="POST">
                 <select name="opcionsCercador">
                     <option value="0">Selecciona una opció per filtrar</option>
                     <?php
@@ -93,6 +88,8 @@
         <section id="llistat">
             <ul>
                 <?php
+                $queryDefault = "SELECT * FROM llibres $despresQuery";
+                $resultatDefault = mysqli_query($connexio, $queryDefault);
                 while ($row = mysqli_fetch_array($resultatDefault)) { ?>
                     <li>
                         <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
@@ -100,7 +97,9 @@
                             <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
                         </div>
                     </li>
-                <?php } ?>
+                <?php } 
+                mysqli_close($connexio);
+                ?>
             </ul>
         </section>
     </main>
