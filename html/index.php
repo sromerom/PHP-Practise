@@ -140,6 +140,7 @@
         ?>
     </main>
     <footer>
+        <div></div>
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
