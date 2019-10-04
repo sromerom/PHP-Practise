@@ -17,14 +17,15 @@ CREATE TABLE llibres (
 CREATE TABLE usuaris (
     id_usuari MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    usuari VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL UNIQUE,
     contrasenya VARCHAR(120) NOT NULL
 );
 
 
 /****** CREACIO DE LES DADES ******/
 
-INSERT INTO usuaris VALUES (1, 'Samuel', 'probandoLogin.esliceu.net', md5('hola'));
+INSERT INTO usuaris VALUES (1, 'Samuel', 'SamDerx', 'probandoLogin.esliceu.net', md5('hola'));
 
 
 

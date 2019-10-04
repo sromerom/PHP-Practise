@@ -1,3 +1,6 @@
+<?php
+//header("location: index.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +11,11 @@
 </head>
 <body>
     <h2>Inicia sessió:</h2>
-    <form action="" method="POST">
+    <form action="index.php" method="POST">
         <?php
         if(isset($loginError)) {
             echo $loginError;
+            echo "<br>";
         }
         ?>
         <label for="">Nom usuari:</label><br>

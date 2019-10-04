@@ -15,6 +15,17 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    $varSession = $_SESSION['usuarip'];
+    
+    echo $varSession;
+    if($varSession == null || $varSession = '') {
+        echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
+        //header("location: login.php");
+        die();
+    }
+    ?>
     <header>
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>

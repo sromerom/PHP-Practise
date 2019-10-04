@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <title>Document</title>
+    <title>Gestiona Llibres</title>
 </head>
 
 <body>
@@ -27,6 +27,13 @@
     <main>
         <?php
         include('conexion.php');
+        session_start();
+        $varSession = $_SESSION['usuarip'];
+        if ($varSession == null || $varSession = '') {
+            echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
+            //header("location: login.php");
+            die();
+        }
         if (isset($_GET['id_llibre'])) {
             $id_llibre = $_GET['id_llibre'];
 
@@ -35,7 +42,7 @@
             if ($resCon) {
                 $row = $resCon->fetch_assoc();
 
-          /*      
+                /*      
         echo '<form action="modificar.php" method="POST">';
         echo '<label for="descripcio">Inserta una descripció pel producte:</label><br>';
         echo '<textarea name="descripcio" id="descripcio" cols="30" rows="10">'.$row['descripcio'].'</textarea><br>';
@@ -58,14 +65,13 @@
                 echo '<input name="autorMod" value="' . $row['autor'] . '" type="text" /></br>';
 
                 echo '<label for="descripcioMod">Descripció: </label><br>';
-                echo '<textarea name="descripcioMod" cols="40" rows="10">'. $row['descripcio'].'</textarea></br>';
+                echo '<textarea name="descripcioMod" cols="40" rows="10">' . $row['descripcio'] . '</textarea></br>';
 
                 echo '<label for="uriMod">Uri: </label><br>';
                 echo '<input name="uriMod" value="' . $row['uri'] . '" type="text" /></br>';
-                
+
                 echo '<button type="submit" class="btn btn-warning">Modifica</button>';
                 echo '</form>';
-                
             }
         }
 
