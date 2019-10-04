@@ -16,6 +16,44 @@
 </head>
 
 <body>
+    <?php
+    include("conexion.php");
+
+    /* CONSULTA A LA BASE DE DADES*/
+
+    $where = "";
+    $ordenar =$_POST['opcionsCercador'];
+    $textCerca = $_POST['search'];
+
+    if(isset($_POST['cerca'])) {
+        if(empty($_POST['opcionsCercador'])) {
+            $where = "WHERE titol like '".$textCerca."%'";
+        } else if(empty($_POST['search'])) {
+            if($ordenar == 1) {
+                $where = "ORDER BY titol";
+            } else if($ordenar == 2) {
+                $where = "ORDER BY titol DESC";
+            } else {
+                $where = "ORDER BY data_afegit";
+            }
+        } else {
+            if($ordenar == 1) {
+                $where = "WHERE titol like '".$textCerca."%' ORDER BY titol";
+                //$where = "ORDER BY titol";
+            } else if($ordenar == 2) {
+                $where = "WHERE titol like '".$textCerca."%' ORDER BY titol DESC";
+                //$where = "ORDER BY titol DESC";
+            } else {
+                $where = "WHERE titol like '".$textCerca."%' ORDER BY data_afegit";
+                //$where = "ORDER BY data_afegit";
+            }
+        }
+    }
+
+    $queryDefault = "SELECT * FROM llibres $where";
+    $resultatDefault = mysqli_query($connexio, $queryDefault);
+    ?>
+
     <header>
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
@@ -30,7 +68,7 @@
             <!-- <form method="POST" action="orderingList.php"> -->
             <form method="POST" action="index.php">
                 <select name="opcionsCercador">
-                    <!-- <option value="0">Selecciona una opció per filtrar</option> -->
+                    <option value="0">Selecciona una opció per filtrar</option>
                     <?php
                     $arrayOpcions = array(1 => "Ordenat per A-Z", "Ordenat per Z-A", "Ordenat per data");
 
@@ -47,81 +85,10 @@
                     <!-- <option value="data">Ordenat per data</option> -->
                 </select>
                 <input type="search" name="search">
-                <input type="submit" value="Cerca">
+                <input type="submit" name="cerca" value="Cerca">
             </form>
         </section>
-        <?php
-        include("conexion.php");
-        $option = isset($_POST['opcionsCercador']);
-        $search = isset($_POST['search']);
-
-        if ($search) {
-            $inputCerca = $_POST['search'];
-            echo "<p>" . $inputCerca . "</p>";
-            $queryCerca = "SELECT * FROM llibres WHERE titol='$inputCerca'";
-            $resultatCerca = mysqli_query($connexio, $queryCerca);
-
-            ?>
-            <section id="llistat">
-                <ul>
-                    <?php
-                        while ($row = mysqli_fetch_array($resultatCerca)) { ?>
-                        <li>
-                            <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
-                            <div class="under">
-                                <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-        <?php
-
-        }
-        
-        if ($option) {
-            $x = $_POST['opcionsCercador'];
-
-            echo "<h1>" . $_POST['opcionsCercador'] . "</h1>";
-            $queryAZ = "SELECT * FROM llibres ORDER BY titol";
-            $queryZA = "SELECT * FROM llibres ORDER BY titol desc";
-            $queryData = "SELECT * FROM llibres ORDER BY data_afegit";
-
-
-
-            if ($x == 1) {
-                //echo "<p>Estas ordenando de A a la Z</p>";
-                //$resultatAZ = mysqli_query($connexio, $queryAZ);
-                $resultatGlobal = mysqli_query($connexio, $queryAZ);
-            } else if ($x == 2) {
-                //echo "<p>Estas ordenando de Z a la A</p>";
-                //$resultatZA = mysqli_query($connexio, $queryZA);
-                $resultatGlobal = mysqli_query($connexio, $queryZA);
-            } else if ($x == 3) {
-                //echo "<p>Estas ordenando por fecha</p>";
-                //$resultatData = mysqli_query($connexio, $queryData);
-                $resultatGlobal = mysqli_query($connexio, $queryData);
-            }
-            ?>
-            <section id="llistat">
-                <ul>
-                    <?php
-                        while ($row = mysqli_fetch_array($resultatGlobal)) { ?>
-                        <li>
-                            <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
-                            <div class="under">
-                                <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
-                            </div>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </section>
-        <?php
-        } else {
-            echo "La primera vez se situaria aqui";
-            $queryDefault = "SELECT * FROM llibres";
-            $resultatDefault = mysqli_query($connexio, $queryDefault);
-            ?>
+        <!-- CARREGAR LLISTA DINAMICA -->
             <section id="llistat">
                 <ul>
                     <?php
@@ -135,12 +102,8 @@
                     <?php } ?>
                 </ul>
             </section>
-        <?php
-        }
-        ?>
     </main>
     <footer>
-        <div></div>
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
