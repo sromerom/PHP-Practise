@@ -15,16 +15,26 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <title>Compra Llibres</title>
 </head>
+
 <body>
     <header>
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
             <ul>
-                <li><a href="../html/index.php" class="btn btn-info btn-lg">Inici</a></li>
-                <li><a href="../html/formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="principal.php" class="btn btn-info btn-lg">Inici</a></li>
+                <li><a href="formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="endLogin.php" class="btn btn-info btn-lg">Surt</a></li>
             </ul>
+            <p>Benvingut
+                <?php
+                session_start();
+                //echo $_SESSION['usuarip'];
+                //echo $_SESSION['usuarip'];
+                echo $_SESSION['nomSessio'];
+                ?>
+            </p>
         </section>
-    </header>
+    </header>F
     <main>
         <h2>Dades del llibre:</h2>
         <?php
@@ -37,36 +47,24 @@
 
 
             if ($resCon) {
-                /*
+                
                 $fila = $resCon->fetch_assoc();
-                echo 'Datos de la receta: <br/>';
-                echo '<table width="100%" border="1">';
-                echo '    <tr><td>ID:</td><td>' . $fila['id_llibre'] . '</td></tr>';
-                echo '    <tr><td>Nombre:</td><td>' . $fila['descripcio'] . '</td></tr>';
-                echo '    <tr><td>Nombre:</td><td>' . $fila['uri'] . '</td></tr>';
-                echo ' </table><br/><br/>';
-
-                //echo ' <a href="inicial.php">Volver</a> | <a href="form_receta.php?id_receta='.$id_receta.'">Modifica la receta</a>';
-                */
-
-                $fila = $resCon->fetch_assoc();
-                //echo '<tr><td>ID:</td><td>' . $fila['id_llibre'] . '</td></tr>';
                 echo '<img src="' . $fila['uri'] . '"><br>';
 
                 echo '<h3>ID llibre:</h3>';
-                echo '<p>'. $fila['id_llibre'] . '</p><br>';
+                echo '<p>' . $fila['id_llibre'] . '</p><br>';
 
                 echo '<h3>Titol:</h3>';
-                echo '<p>'. $fila['titol'] . '</p><br>';
+                echo '<p>' . $fila['titol'] . '</p><br>';
 
                 echo '<h3>Autor:</h3>';
-                echo '<p>'. $fila['autor'] . '</p><br>';
+                echo '<p>' . $fila['autor'] . '</p><br>';
 
                 echo '<h3>Descripció: </h3>';
-                echo '<p>'. $fila['descripcio'] . '</p><br>';
+                echo '<p>' . $fila['descripcio'] . '</p><br>';
 
                 echo '<h3>Data que s ha afegit :</h3>';
-                echo '<p>'. $fila['data_afegit'] . '</p><br>';
+                echo '<p>' . $fila['data_afegit'] . '</p><br>';
             }
         } else {
             echo 'Error, problema per aconseguir el ID del llibre.';

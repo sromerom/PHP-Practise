@@ -6,7 +6,7 @@ USE Llibreria;
 
 /****** CREACIO DE LES TAULES ******/
 CREATE TABLE llibres (
-    id_llibre INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    id_llibre MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     titol VARCHAR(150) NOT NULL,
     autor VARCHAR(100),
     descripcio TEXT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE llibres (
 );
 
 CREATE TABLE usuaris (
-    id_usuari MEDIUMINT PRIMARY KEY AUTO_INCREMENT,
+    id_usuari MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
     usuari VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
@@ -25,7 +25,8 @@ CREATE TABLE usuaris (
 
 /****** CREACIO DE LES DADES ******/
 
-INSERT INTO usuaris VALUES (1, 'Samuel', 'SamDerx', 'probandoLogin.esliceu.net', md5('hola'));
+INSERT INTO usuaris VALUES (1, 'Samuel', 'SamuelUser', 'probandoLogin@esliceu.net', md5('hola'));
+INSERT INTO usuaris VALUES (2, 'Administrador', 'Admin', 'admin@esliceu.net', md5('sROMEROm199'));
 
 
 

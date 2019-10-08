@@ -18,9 +18,8 @@
     <?php
     session_start();
     $varSession = $_SESSION['usuarip'];
-    
-    echo $varSession;
-    if($varSession == null || $varSession = '') {
+
+    if ($varSession == null || $varSession = '') {
         echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
         //header("location: login.php");
         die();
@@ -30,9 +29,17 @@
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
             <ul>
-                <li><a href="../html/index.php" class="btn btn-info btn-lg">Inici</a></li>
-                <li><a href="../html/formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="principal.php" class="btn btn-info btn-lg">Inici</a></li>
+                <li><a href="formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="endLogin.php" class="btn btn-info btn-lg">Surt</a></li>
             </ul>
+            <p>Benvingut
+                <?php
+                //echo $_SESSION['usuarip'];
+                //echo $_SESSION['usuarip'];
+                echo $_SESSION['nomSessio'];
+                ?>
+            </p>
         </section>
     </header>
     <main>
@@ -54,7 +61,6 @@
                     <input type="text" name="uri"><br>
 
                     <button type="submit" name="formulari" class="btn btn-success">Afegeix</button>
-                    <!-- <button type="submit" name="formulari" class="btn btn-danger">Elimina</button> -->
                 </form>
             </section>
             <br>

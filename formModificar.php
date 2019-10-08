@@ -42,16 +42,6 @@
             if ($resCon) {
                 $row = $resCon->fetch_assoc();
 
-                /*      
-        echo '<form action="modificar.php" method="POST">';
-        echo '<label for="descripcio">Inserta una descripció pel producte:</label><br>';
-        echo '<textarea name="descripcio" id="descripcio" cols="30" rows="10">'.$row['descripcio'].'</textarea><br>';
-        echo '<label for="uri">Inserta la uri o "link" de la imatge:</label><br>';
-        echo '<input type="text" name="uri" value="'.$row['uri'].'"><br>';
-        echo '<button type="submit" name="formulari" class="btn btn-success">Actualitza</button>';
-        echo '</form>';
-        */
-
                 echo 'Dades del llibre seleccionat: <br/>';
                 echo '<form action="modificar.php" method="POST" class="disFormulari">';
 

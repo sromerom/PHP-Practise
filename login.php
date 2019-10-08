@@ -1,6 +1,3 @@
-<?php
-//header("location: index.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +19,7 @@
         <input type="text" name="usuari"><br>
         <label for="">Contrasenya:</label><br>
         <input type="password" name="contrasenya">
-        <input type="submit">
+        <input type="submit" name="sendLogin">
     </form>
 </body>
 </html>

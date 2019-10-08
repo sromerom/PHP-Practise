@@ -23,7 +23,6 @@
     include("conexion.php");
     session_start();
     $varSession = $_SESSION['usuarip'];
-    echo $varSession;
     if($varSession == null || $varSession = '') {
         echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
         //header("location: login.php");
@@ -49,13 +48,10 @@
         } else {
             if ($ordenar == 1) {
                 $despresQuery = "WHERE titol like '" . $textCerca . "%' ORDER BY titol";
-                //$where = "ORDER BY titol";
             } else if ($ordenar == 2) {
                 $despresQuery = "WHERE titol like '" . $textCerca . "%' ORDER BY titol DESC";
-                //$where = "ORDER BY titol DESC";
             } else {
                 $despresQuery = "WHERE titol like '" . $textCerca . "%' ORDER BY data_afegit";
-                //$where = "ORDER BY data_afegit";
             }
         }
     }
@@ -65,16 +61,21 @@
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
             <ul>
-                <li><a href="../html/principal.php" class="btn btn-info btn-lg">Inici</a></li>
-                <li><a href="../html/formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
-                <li><a href="../html/endLogin.php" class="btn btn-info btn-lg">Surt</a></li>
+                <li><a href="principal.php" class="btn btn-info btn-lg">Inici</a></li>
+                <li><a href="formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="endLogin.php" class="btn btn-info btn-lg">Surt</a></li>
             </ul>
-            <p>Benvingut <?php echo $varSession?></p>
+            <p>Benvingut
+            <?php
+            //echo $_SESSION['usuarip'];
+            //echo $_SESSION['usuarip'];
+            echo $_SESSION['nomSessio'];
+            ?>
+            </p>
         </section>
     </header>
     <main>
         <section id="cercador">
-            <!-- <form method="POST" action="orderingList.php"> -->
             <form method="POST">
                 <select name="opcionsCercador">
                     <option value="0">Selecciona una opció per filtrar</option>
@@ -89,9 +90,6 @@
                         }
                     }
                     ?>
-                    <!-- <option value="az">Ordenat per A-Z</option> -->
-                    <!-- <option value="za">Ordenat per Z-A</option> -->
-                    <!-- <option value="data">Ordenat per data</option> -->
                 </select>
                 <input type="search" name="search">
                 <input type="submit" name="cerca" value="Cerca">

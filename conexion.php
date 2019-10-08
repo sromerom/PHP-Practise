@@ -1,8 +1,8 @@
 <?php
 
 $host = "localhost";
-$usuari = "root";
-$password = "";
+$usuari = "sromerom";
+$password = "ABCD1234";
 $baseDades = "Llibreria";
 
 $connexio = mysqli_connect($host, $usuari, $password, $baseDades);
