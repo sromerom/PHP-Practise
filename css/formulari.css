@@ -1,0 +1,16 @@
+/* FORMULARI */
+
+#formularis {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.disFormulari input {
+    width: 300px;
+}
+
+.disFormulari label {
+    font-weight: bold;
+}

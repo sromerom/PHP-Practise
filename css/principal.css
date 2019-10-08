@@ -1,0 +1,24 @@
+/* LLISTAT D'ELEMENTS */
+
+#llistat ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#llistat ul li {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#llistat ul li .under {
+    flex-basis: 100%;
+    text-align: center;
+}
+
+#llistat ul li a img {
+    width: 300px;
+    height: 450px;
+}

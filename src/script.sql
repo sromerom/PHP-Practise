@@ -25,8 +25,9 @@ CREATE TABLE usuaris (
 
 /****** CREACIO DE LES DADES ******/
 
-INSERT INTO usuaris VALUES (1, 'Samuel', 'SamuelUser', 'probandoLogin@esliceu.net', md5('hola'));
-INSERT INTO usuaris VALUES (2, 'Administrador', 'Admin', 'admin@esliceu.net', md5('sROMEROm199'));
+INSERT INTO usuaris VALUES (1, 'Samuel', 'sromerom', 'sromerom@esliceu.net', md5('hola'));
+INSERT INTO usuaris VALUES (2, 'Dani', 'dcarrilloc', 'dcarrilloc@esliceu.net', md5('holadcarrilloc'));
+INSERT INTO usuaris VALUES (3, 'Administrador', 'Admin', 'admin@esliceu.net', md5('sROMEROm199'));
 
 
 
