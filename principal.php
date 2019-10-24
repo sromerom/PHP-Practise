@@ -51,10 +51,19 @@
 
     include("conexion.php");
     session_start();
+
+    
     $varSession = $_SESSION['usuarip'];
     if ($varSession == null || $varSession = '') {
-        echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
-        //header("location: login.php");
+        
+        //echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
+        //echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
+        //echo "<p>Per poder anar al login presiona el botó de baix.</p>";
+        //echo "</body>";
+        
+        include("denied.php");
+
+        header("location: denied.php");
         die();
     }
 
@@ -90,6 +99,7 @@
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
             <ul>
+                <li><a href="#principi" class="btn btn-light btn-lg">Principi</a></li>
                 <li><a href="principal.php" class="btn btn-light btn-lg">Inici</a></li>
                 <li><a href="formulari.php" class="btn btn-light btn-lg">Gestiona</a></li>
                 <li><a href="endLogin.php" class="btn btn-light btn-lg">Surt</a></li>
@@ -103,10 +113,12 @@
             </p>
         </section>
     </header>
-    <main>
+    <main id="principi">
+    <a href="#abaix">Ves al footer</a>
         <section id="cercador">
             <form method="POST">
-                <select name="opcionsCercador">
+                <label for="inputSelectCercador">Selecciona una opció per filtrar</label>
+                <select id ="inputSelectCercador" name="opcionsCercador">
                     <option value="0">Selecciona una opció per filtrar</option>
                     <?php
                     $arrayOpcions = array(1 => "Ordenat per A-Z", "Ordenat per Z-A", "Ordenat per data");
@@ -120,12 +132,14 @@
                     }
                     ?>
                 </select>
-                <input type="search" name="search">
+                <label for="inputCercar"></label>
+                <input type="search" id="inputCercar" name="search">
                 <input type="submit" name="cerca" value="Cerca">
             </form>
         </section>
         <!-- CARREGAR LLISTA DINAMICA -->
         <section id="llistat">
+        <h2>Llibres:</h2>
             <ul>
                 <?php
                 $queryDefault = "SELECT * FROM llibres $despresQuery";
@@ -134,7 +148,7 @@
                     <li>
                         <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
                         <div class="under">
-                            <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica Llibre</a>'; ?>
+                            <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica '.$row['titol'].'</a>'; ?>
                         </div>
                     </li>
                 <?php }
@@ -143,7 +157,8 @@
             </ul>
         </section>
     </main>
-    <footer>
+    <a href="#principi">Ves al principi</a>
+    <footer id="abaix">
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
@@ -152,9 +167,9 @@
             </section>
             <section class="socialMedia">
                 <ul>
-                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa"><i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="http://www.esliceu.com/feed/"><i class="fas fa-rss-square"></i></a></li>
-                    <li><a href="https://twitter.com/EsLiceu"><i class="fab fa-twitter-square"></i></a></li>
+                    <li><a href="fhttps://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu">a<i class="fab fa-facebook-square"></i></a></li>
+                    <li><a href="fhttp://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu"><i class="fas fa-rss-square">b</i></a></li>
+                    <li><a href="fhttps://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu"><i class="fab fa-twitter-square">c</i></a></li>
                 </ul>
             </section>
         </section>

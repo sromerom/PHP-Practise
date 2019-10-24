@@ -15,6 +15,23 @@
 </head>
 
 <body>
+<?php
+    include("conexion.php");
+        session_start();
+        $varSession = $_SESSION['usuarip'];
+        if ($varSession == null || $varSession = '') {
+            /*
+            echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
+            echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
+            echo "<p>Per poder anar al login presiona el botó de baix.</p>";
+            echo "</body>";
+            */
+            include("denied.php");
+
+            header("location: denied.php");
+            die();
+        }
+    ?>
     <header>
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
@@ -27,13 +44,6 @@
     <main>
         <?php
         include('conexion.php');
-        session_start();
-        $varSession = $_SESSION['usuarip'];
-        if ($varSession == null || $varSession = '') {
-            echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
-            //header("location: login.php");
-            die();
-        }
         if (isset($_GET['id_llibre'])) {
             $id_llibre = $_GET['id_llibre'];
 

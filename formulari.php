@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ca">>
+<html lang="ca">
 
 <head>
     <meta charset="UTF-8">
@@ -50,8 +50,15 @@
     $varSession = $_SESSION['usuarip'];
 
     if ($varSession == null || $varSession = '') {
-        echo 'Voste no te cap autoritzacio per accedir a aquest pagina';
-        //header("location: login.php");
+        /*
+        echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
+        echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
+        echo "<p>Per poder anar al login presiona el botó de baix.</p>";
+        echo "</body>";
+        */
+        include("denied.php");
+
+        header("location: denied.php");
         die();
     }
     ?>
