@@ -1,3 +1,20 @@
+<?php
+include("conexion.php");
+session_start();
+$varSession = $_SESSION['usuarip'];
+if ($varSession == null || $varSession = '') {
+    /*
+        echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
+        echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
+        echo "<p>Per poder anar al login presiona el botó de baix.</p>";
+        echo "</body>";
+        */
+    include("denied.php");
+    header("location: denied.php");
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ca">
 
@@ -45,27 +62,11 @@
 </head>
 
 <body>
-    <?php
-    include("conexion.php");
-        session_start();
-        $varSession = $_SESSION['usuarip'];
-        if ($varSession == null || $varSession = '') {
-            /*
-            echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
-            echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
-            echo "<p>Per poder anar al login presiona el botó de baix.</p>";
-            echo "</body>";
-            */
-            include("denied.php");
-
-            header("location: denied.php");
-            die();
-        }
-    ?>
     <header>
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
             <ul>
+                <li><a href="#principi" class="btn btn-light btn-lg">Principi</a></li>
                 <li><a href="principal.php" class="btn btn-light btn-lg">Inici</a></li>
                 <li><a href="formulari.php" class="btn btn-light btn-lg">Gestiona</a></li>
                 <li><a href="endLogin.php" class="btn btn-light btn-lg">Surt</a></li>
@@ -80,7 +81,8 @@
             </p>
         </section>
     </header>
-    <main>
+    <main id="principi">
+        <a href="#abaix">Ves al footer</a>
         <h2>Dades del llibre:</h2>
         <?php
         include("conexion.php");
@@ -94,7 +96,7 @@
             if ($resCon) {
 
                 $fila = $resCon->fetch_assoc();
-                echo '<img src="' . $fila['uri'] . '"><br>';
+                echo '<img src="' . $fila['uri'] . '" alt="Això és una imatge del llibre ' . $fila['titol'] . '"><br>';
 
                 echo '<h3>ID llibre:</h3>';
                 echo '<p>' . $fila['id_llibre'] . '</p><br>';
@@ -122,7 +124,8 @@
         mysqli_close($connexio);
         ?>
     </main>
-    <footer>
+    <a href="#principi">Ves al principi</a>
+    <footer id="abaix">
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
@@ -131,10 +134,9 @@
             </section>
             <section class="socialMedia">
                 <ul>
-                    <li><a href="http://www.esliceu.com/feed/"><i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa"><i class="fas fa-rss-square"></i></a>
-                    </li>
-                    <li><a href="https://twitter.com/EsLiceu"><i class="fab fa-twitter-square"></i></a></li>
+                    <li><a href="fhttps://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu">a<i class="fab fa-facebook-square"></i></a></li>
+                    <li><a href="fhttp://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu"><i class="fas fa-rss-square">b</i></a></li>
+                    <li><a href="fhttps://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu"><i class="fab fa-twitter-square">c</i></a></li>
                 </ul>
             </section>
         </section>

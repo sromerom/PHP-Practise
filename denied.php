@@ -50,22 +50,6 @@
         <p>Per poder accedir, inicia sessió.</p>
         <a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>
     </main>
-    <footer>
-        <section class="container">
-            <section class="name">
-                <p>Samuel Romero Marín
-                    <span><i class="far fa-copyright"></i></span>
-                </p>
-            </section>
-            <section class="socialMedia">
-                <ul>
-                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa"><i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="http://www.esliceu.com/feed/"><i class="fas fa-rss-square"></i></a></li>
-                    <li><a href="https://twitter.com/EsLiceu"><i class="fab fa-twitter-square"></i></a></li>
-                </ul>
-            </section>
-        </section>
-    </footer>
 </body>
 
 </html>
