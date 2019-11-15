@@ -1,21 +1,22 @@
 <?php
-    include("conexion.php");
-    session_start();
+
+include("conexion.php");
+session_start();
 
 
-    $varSession = $_SESSION['usuarip'];
-    if ($varSession == null || $varSession = '') {
-        
-        //echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
-        //echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
-        //echo "<p>Per poder anar al login presiona el botó de baix.</p>";
-        //echo "</body>";
-        
-        include("denied.php");
+$varSession = $_SESSION['usuarip'];
+if ($varSession == null || $varSession = '') {
 
-        header("location: denied.php");
-        die();
-    }
+    //echo '<h1>Voste no te cap autoritzacio per accedir a aquest pagina</h1>';
+    //echo '<a href="#torna"><a id="torna" href="login.php" class="btn btn-light btn-lg">Ves al login</a></a>';
+    //echo "<p>Per poder anar al login presiona el botó de baix.</p>";
+    //echo "</body>";
+
+    include("denied.php");
+
+    header("location: denied.php");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -113,11 +114,11 @@
         </section>
     </header>
     <main id="principi">
-    <a href="#abaix">Ves al footer</a>
+        <a href="#abaix">Ves al footer</a>
         <section id="cercador">
             <form method="POST">
                 <label for="inputSelectCercador">Selecciona una opció per filtrar</label>
-                <select id ="inputSelectCercador" name="opcionsCercador">
+                <select id="inputSelectCercador" name="opcionsCercador">
                     <option value="0">Selecciona una opció per filtrar</option>
                     <?php
                     $arrayOpcions = array(1 => "Ordenat per A-Z", "Ordenat per Z-A", "Ordenat per data");
@@ -138,7 +139,7 @@
         </section>
         <!-- CARREGAR LLISTA DINAMICA -->
         <section id="llistat">
-        <h2>Llibres:</h2>
+            <h2>Llibres:</h2>
             <ul>
                 <?php
                 $queryDefault = "SELECT * FROM llibres $despresQuery";
@@ -147,7 +148,7 @@
                     <li>
                         <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
                         <div class="under">
-                            <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica '.$row['titol'].'</a>'; ?>
+                            <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica ' . $row['titol'] . '</a>'; ?>
                         </div>
                     </li>
                 <?php }
