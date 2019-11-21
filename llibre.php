@@ -3,9 +3,9 @@ include("conexion.php");
 session_start();
 $varSession = $_SESSION['usuarip'];
 if ($varSession == null || $varSession = '') {
-    include("denied.php");
-    header("location: denied.php");
-    die();
+    //include("denied.php");
+    //header("location: denied.php");
+    //die();
 }
 
 ?>
@@ -139,14 +139,14 @@ if ($varSession == null || $varSession = '') {
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
-                    <span><i class="far fa-copyright"></i></span>
+                    <span>&copy</span>
                 </p>
             </section>
             <section class="socialMedia">
                 <ul>
-                    <li><a href="fhttps://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu">a<i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="fhttp://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu"><i class="fas fa-rss-square">b</i></a></li>
-                    <li><a href="fhttps://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu"><i class="fab fa-twitter-square">c</i></a></li>
+                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu" target="_blank">Facebook Es Liceu</a></li>
+                    <li><a href="http://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu" target="_blank">RSS Es Liceu</a></li>
+                    <li><a href="https://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu" target="_blank" >Twitter Es Liceu</a></li>
                 </ul>
             </section>
         </section>

@@ -5,10 +5,10 @@ session_start();
 $varSession = $_SESSION['usuarip'];
 if ($varSession == null || $varSession = '') {
 
-    include("denied.php");
+    //include("denied.php");
 
-    header("location: denied.php");
-    die();
+    //header("location: denied.php");
+    //die();
 }
 ?>
 
@@ -79,12 +79,22 @@ if ($varSession == null || $varSession = '') {
         <section id="menu">
             <h1><img src="../src/logo.png" alt="Logo de la pàgina" id="logo"></h1>
             <ul>
-                <li><a href="../html/index.php" class="btn btn-info btn-lg">Inici</a></li>
-                <li><a href="../html/formulari.php" class="btn btn-info btn-lg">Gestiona</a></li>
+                <li><a href="#principi" class="btn btn-light btn-lg">Principi</a></li>
+                <li><a href="principal.php" class="btn btn-light btn-lg">Inici</a></li>
+                <li><a href="formulari.php" class="btn btn-light btn-lg">Gestiona</a></li>
+                <li><a href="endLogin.php" class="btn btn-light btn-lg">Surt</a></li>
             </ul>
+            <p>Benvingut
+                <?php
+                //echo $_SESSION['usuarip'];
+                //echo $_SESSION['usuarip'];
+                echo $_SESSION['nomSessio'];
+                ?>
+            </p>
         </section>
     </header>
-    <main>
+    <main id="principi">
+        <a href="#abaix">Ves al footer</a>
         <?php
         include('conexion.php');
         if (isset($_GET['id_llibre'])) {
@@ -96,22 +106,43 @@ if ($varSession == null || $varSession = '') {
                 $row = $resCon->fetch_assoc();
 
                 echo 'Dades del llibre seleccionat: <br/>';
+
+                //<form action="modificar.php" method="post">
                 echo '<form action="modificar.php" method="POST" class="disFormulari">';
 
-                echo '<label for="id_llibreMod">ID: </label><br>';
-                echo '<input name="id_llibreMod" value="' . $row['id_llibre'] . '" type="text" /></br>';
 
-                echo '<label for="titolMod">Títol: </label><br>';
-                echo '<input name="titolMod" value="' . $row['titol'] . '" type="text" /></br>';
+                //<label for="txt_ID" id="ID-ariaLabel">ID</label>
+                //<input id="txt_ID" name="txt_ID" type="text" aria-labelledby="ID-ariaLabel">
+                echo '<label for="id_llibreMod" id="ID-ariaLabel">ID: (Obligatori)</label><br>';
+                echo '<input id="id_llibreMod" name="id_llibreMod" value="' . $row['id_llibre'] . '" type="text" aria-labelledby="ID-ariaLabel" title="Inserta id llibre. Aquest es un camp obligatori" /></br>';
 
-                echo '<label for="autorMod">Autor: </label><br>';
-                echo '<input name="autorMod" value="' . $row['autor'] . '" type="text" /></br>';
 
-                echo '<label for="descripcioMod">Descripció: </label><br>';
-                echo '<textarea name="descripcioMod" cols="40" rows="10">' . $row['descripcio'] . '</textarea></br>';
 
-                echo '<label for="uriMod">Uri: </label><br>';
-                echo '<input name="uriMod" value="' . $row['uri'] . '" type="text" /></br>';
+                //<label for="txt_Títol" id="Títol-ariaLabel">Títol</label>
+                //<input id="txt_Títol" name="txt_Títol" type="text" aria-labelledby="Títol-ariaLabel">
+                echo '<label for="titolMod" id="Títol-ariaLabel">Títol: (Obligatori)</label><br>';
+                echo '<input id="titolMod" name="titolMod" value="' . $row['titol'] . '" type="text" aria-labelledby="Títol-ariaLabel" title="Inserta titol del llibre. Aquest es un camp obligatori"/></br>';
+
+
+
+                //<label for="txt_Autor" id="Autor-ariaLabel">Autor</label>
+                //<input id="txt_Autor" name="txt_Autor" type="text" aria-labelledby="Autor-ariaLabel">
+                echo '<label for="autorMod" id="Autor-ariaLabel">Autor: (Obligatori)</label><br>';
+                echo '<input id="autorMod" name="autorMod" value="' . $row['autor'] . '" type="text" aria-labelledby="Autor-ariaLabel" title="Inserta el autor del llibre. Aquest es un camp obligatori"/></br>';
+
+
+
+                //<label for="txtarea_Descripció" id="Descripció-ariaLabel">Descripció</label>
+                //<textarea id="txtarea_Descripció" name="txtarea_Descripció" cols="20" rows="3" aria-labelledby="Descripció-ariaLabel"></textarea>
+                echo '<label for="descripcioMod" id="Descripció-ariaLabel">Descripció: (Obligatori)</label><br>';
+                echo '<textarea id="descripcioMod" name="descripcioMod" cols="40" rows="10" aria-labelledby="Descripció-ariaLabel" title="Inserta una descripció del llibre. Aquest es un camp obligatori">' . $row['descripcio'] . '</textarea></br>';
+
+
+
+                //<label for="txt_Uri" id="Uri-ariaLabel">Uri</label>
+                //<input id="txt_Uri" name="txt_Uri" type="text" aria-labelledby="Uri-ariaLabel">
+                echo '<label for="uriMod" id="Uri-ariaLabel">Uri: (Obligatori)</label><br>';
+                echo '<input id="uriMod" name="uriMod" value="' . $row['uri'] . '" type="text" aria-labelledby="Uri-ariaLabel title="Inserta una url de la imatge. Aquest es un camp obligatori"" /></br>';
 
                 echo '<button type="submit" class="btn btn-warning">Modifica</button>';
                 echo '</form>';
@@ -121,6 +152,23 @@ if ($varSession == null || $varSession = '') {
         mysqli_close($connexio);
         ?>
     </main>
+    <a href="#principi">Ves al principi</a>
+    <footer id="abaix">
+        <section class="container">
+            <section class="name">
+                <p>Samuel Romero Marín
+                    <span>&copy</span>
+                </p>
+            </section>
+            <section class="socialMedia">
+                <ul>
+                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu" target="_blank">Facebook Es Liceu</a></li>
+                    <li><a href="http://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu" target="_blank">RSS Es Liceu</a></li>
+                    <li><a href="https://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu" target="_blank">Twitter Es Liceu</a></li>
+                </ul>
+            </section>
+        </section>
+    </footer>
 </body>
 
 </html>

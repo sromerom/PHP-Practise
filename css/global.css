@@ -56,13 +56,13 @@ header {
 }
 
 #menu ul li a {
-    color: greenyellow;
+    color: #adff2f;
     background-color: black;
 }
 
 #menu ul li a:hover {
-    color: cyan;
-    border-color: cyan;
+    color: #00ffff;
+    border-color: #00ffff;
 }
 
 

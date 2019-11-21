@@ -1,0 +1,19 @@
+# Per defecte
+
+User-agent: *
+Disallow: /css/
+Disallow: /font-awesome-4.7.0/
+Disallow: /practicaCGI/*
+Disallow: /src/
+Disallow: /afegir.php
+Disallow: /conexion.php
+Disallow: /eliminar.php
+Disallow: /endLogin.php
+#Disallow: /google7cfab3732428878c.html
+Disallow: /modificar.php
+Allow: /
+Sitemap: http://www115.cfgs.esliceu.net/sitemap.xml
+
+#Bloqueig a arxius pdf
+User-agent: *
+Disallow: /*.pdf$

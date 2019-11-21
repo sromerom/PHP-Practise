@@ -98,72 +98,32 @@ if ($varSession == null || $varSession = '') {
         <section id="formularis">
             <section id="form1">
                 <h2>Insereix un nou llibre: </h2>
-                <form action="afegir.php" method="POST" class="disFormulari">
-                    <div class="row requiredRow">
-                        <label for="txt_Insereixtitoldelllibre" id="Insereixtitoldelllibre-ariaLabel">Insereix titol del llibre:</label>
-                        <input id="txt_Insereixtitoldelllibre" name="titol" type="text" aria-labelledby="Insereixtitoldelllibre-ariaLabel" class="required" title="Insereix titol del llibre:. Aquest es un camp obligatori">
-                    </div>
-                    <div class="row requiredRow">
-                        <label for="txt_Insereixautordelllibre" id="Insereixautordelllibre-ariaLabel">Insereix autor del llibre:</label>
-                        <input id="txt_Insereixautordelllibre" name="autor" type="text" aria-labelledby="Insereixautordelllibre-ariaLabel" class="required" title="Insereix autor del llibre:. Aquest es un camp obligatori">
-                    </div>
-                    <div class="row requiredRow">
-                        <label for="txtarea_Insertaunadescripciódelproducte" id="Insertaunadescripciódelproducte-ariaLabel">Inserta una descripció del producte:</label>
-                        <textarea id="txtarea_Insertaunadescripciódelproducte" name="descripcio" cols="40" rows="10" aria-labelledby="Insertaunadescripciódelproducte-ariaLabel" class="required" title="Inserta una descripció del producte:. Aquest es un camp obligatori"></textarea>
-                    </div>
-                    <div class="row requiredRow">
-                        <label for="txt_Insertalaurlo" id="Insertalaurlo-ariaLabel">Inserta la url o </label>
-                        <input id="txt_Insertalaurlo" name="uri" type="text" aria-labelledby="Insertalaurlo-ariaLabel" class="required" title="Inserta la url o . Aquest es un camp obligatori">
-                    </div>
-                    <div class="row">
-                        <button type="submit" name="formulari" class="btn btn-success">Afegeix</button>
-                    </div>
+                <form id="formId" action="afegir.php" method="POST" onsubmit="gtag('event', 'send', { 'event_category': 'createBook', 'event_label': 'send-book', value': '0'});">
+                    <label for="txt_Insereixtitoldelllibre" id="Insereixtitoldelllibre-ariaLabel">Insereix titol del llibre: (Obligatori)</label>
+                    <input id="txt_Insereixtitoldelllibre" name="titol" type="text" aria-labelledby="Insereixtitoldelllibre-ariaLabel" title="Insereix titol del llibre: Aquest es un camp obligatori">
+
+                    <label for="txt_Insereixautordelllibre" id="Insereixautordelllibre-ariaLabel">Insereix autor del llibre: (Obligatori)</label>
+                    <input id="txt_Insereixautordelllibre" name="autor" type="text" aria-labelledby="Insereixautordelllibre-ariaLabel" title="Insereix autor del llibre: Aquest es un camp obligatori">
+
+                    <label for="txtarea_Insertaunadescripciódelproducte" id="Insertaunadescripciódelproducte-ariaLabel">Inserta una descripció del producte: (Obligatori)</label>
+                    <textarea id="txtarea_Insertaunadescripciódelproducte" name="descripcio" cols="40" rows="10" aria-labelledby="Insertaunadescripciódelproducte-ariaLabel" title="Inserta una descripció del producte: Aquest es un camp obligatori"></textarea>
+
+                    <label for="txt_Insertalaurlo" id="Insertalaurlo-ariaLabel">Inserta la url: (Obligatori)</label>
+                    <input id="txt_Insertalaurlo" name="uri" type="text" aria-labelledby="Insertalaurlo-ariaLabel" title="Inserta la url. Aquest es un camp obligatori">
+
+                
+                    <button id="contact-submit" type="submit" name="formulari" class="btn btn-success" type="submit" onClick="ga('send', 'event', { eventCategory: 'form', eventAction: 'submit', eventLabel: 'form-formulari.php', eventValue: 0});">Afegeix</button>
                 </form>
-
-                <!--
-
-                <form class="disFormulari" action="afegir.php" method="POST">
-
-                    <label for="titol">Insereix titol del llibre: </label><br>
-                    <input type="text" name="titol"><br>
-
-                    <label for="autor">Insereix autor del llibre: </label><br>
-                    <input type="text" name="autor"><br>
-
-                    <label for="descripcio">Inserta una descripció pel producte:</label><br>
-                    <textarea name="descripcio" id="descripcio" cols="40" rows="10"></textarea><br>
-
-                    <label for="uri">Inserta la uri o "link" de la imatge:</label><br>
-                    <input type="text" name="uri"><br>
-
-                    <button type="submit" name="formulari" class="btn btn-success">Afegeix</button>
-                </form>
-                -->
+                <input id="contact-submit2" class="button" type="submit" value="Submit" onClick="ga('send', 'event', {eventCategory: 'form',eventAction: 'click',eventLabel: 'form-formulari.php', transport: 'beacon'});">
             </section>
-            <br>
-            <hr><br>
-
             <section id="form2">
                 <h2>Elimina un llibre: </h2>
                 <form action="eliminar.php" method="POST">
-                    <div class="row requiredRow">
-                        <label for="txt_Insertaiddelproducteaeliminar" id="Insertaiddelproducteaeliminar-ariaLabel">Inserta id del producte a eliminar:</label>
-                        <input id="txt_Insertaiddelproducteaeliminar" name="id_llibre" type="text" aria-labelledby="Insertaiddelproducteaeliminar-ariaLabel" class="required" title="Inserta id del producte a eliminar:. Aquest es un camp obligatori">
-                    </div>
-                    <div class="row">
+                        <label for="txt_Insertaiddelproducteaeliminar" id="Insertaiddelproducteaeliminar-ariaLabel">Inserta id del producte a eliminar: (Obligatori)</label>
+                        <input id="txt_Insertaiddelproducteaeliminar" name="id_llibre" type="text" aria-labelledby="Insertaiddelproducteaeliminar-ariaLabel" title="Inserta id del producte a eliminar:. Aquest es un camp obligatori">
+ 
                         <button type="submit" name="formulari2" class="btn btn-danger">Elimina</button>
-                    </div>
                 </form>
-
-
-                <!--
-                <h2>Elimina un llibre: </h2>
-                <form class="disFormulari" action="eliminar.php" method="POST">
-                    <label for="id_llibre">Inserta id del producte a eliminar:</label><br>
-                    <input type="number" name="id_llibre"><br>
-                    <button type="submit" name="formulari2" class="btn btn-danger">Elimina</button>
-                </form>
-                -->
             </section>
         </section>
     </main>
@@ -172,16 +132,17 @@ if ($varSession == null || $varSession = '') {
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
-                    <span><i class="far fa-copyright"></i></span>
+                    <span>&copy</span>
                 </p>
             </section>
             <section class="socialMedia">
                 <ul>
-                    <li><a href="fhttps://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu">a<i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="fhttp://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu"><i class="fas fa-rss-square">b</i></a></li>
-                    <li><a href="fhttps://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu"><i class="fab fa-twitter-square">c</i></a></li>
+                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu" target="_blank">Facebook Es Liceu</a></li>
+                    <li><a href="http://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu" target="_blank">RSS Es Liceu</a></li>
+                    <li><a href="https://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu" target="_blank">Twitter Es Liceu</a></li>
                 </ul>
             </section>
+        </section>
     </footer>
 </body>
 

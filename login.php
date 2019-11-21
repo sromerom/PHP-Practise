@@ -61,20 +61,15 @@
 </head>
 
 <body>
+    <h1>Compra Llibres</h1>
     <main class="inicisessio">
-        <img src="src/fotoLogin.png" class="avatar" alt="Logo login">
+        <img src="src/logo.png" class="avatar" alt="Logo login">
         <h2>Inicia sessió:</h2>
-        <form action="index.php" method="POST">
-            <?php
-            if (isset($loginError)) {
-                echo $loginError;
-                echo "<br>";
-            }
-            ?>
-            <label for="">Nom usuari:</label><br>
-            <input type="text" name="usuari"><br>
-            <label for="">Contrasenya:</label><br>
-            <input type="password" name="contrasenya">
+        <form action="index.php" method="post">
+            <label for="NomUsuari" id="NomUsuariLabel">Nom Usuari</label>
+            <input id="NomUsuari" name="usuari" type="text" aria-labelledby="NomUsuariLabel" title="Inserta el usuari. Aquest es un camp obligatori">
+            <label for="Contrasenya" id="ContrasenyaLabel">Contrasenya</label>
+            <input id="Contrasenya" name="contrasenya" type="password" aria-labelledby="ContrasenyaLabel" title="Inserta la contrasenya. Aquest es un camp obligatori">
             <input class="button" type="submit" name="sendLogin">
         </form>
     </main>

@@ -8,6 +8,8 @@ body {
     margin: 0;
     padding: 0;
     background: url(../src/backgroundLogin.jpg);
+    background-attachment: fixed;
+    background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -34,12 +36,12 @@ h2 {
 }
 
 .avatar {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 10%;
     position: absolute;
-    top: -50px;
-    left: calc(50% - 50px);
+    top: -100px;
+    left: calc(30% - 30px);
 }
 
 .inicisessio label {

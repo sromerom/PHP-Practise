@@ -12,10 +12,10 @@ if ($varSession == null || $varSession = '') {
     //echo "<p>Per poder anar al login presiona el botó de baix.</p>";
     //echo "</body>";
 
-    include("denied.php");
+    //include("denied.php");
 
-    header("location: denied.php");
-    die();
+    //header("location: denied.php");
+    //die();
 }
 ?>
 
@@ -66,17 +66,6 @@ if ($varSession == null || $varSession = '') {
     <!-- Seguiment amb google analytics -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152549941-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-152549941-1');
-    </script>
-
     <title>Compra Llibres | Tenda virtual de llibres i Ebooks</title>
 </head>
 
@@ -172,23 +161,33 @@ if ($varSession == null || $varSession = '') {
             </ul>
         </section>
     </main>
-    <a href="#principi">Ves al principi</a>
+    <a href="#principi" onclick="ga('send', 'event', 'adaltPrincipal', 'clic', 'adalt-click');">Ves al principi</a>
     <footer id="abaix">
         <section class="container">
             <section class="name">
                 <p>Samuel Romero Marín
-                    <span><i class="far fa-copyright"></i></span>
+                    <span>&copy</span>
                 </p>
             </section>
             <section class="socialMedia">
                 <ul>
-                    <li><a href="fhttps://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu">a<i class="fab fa-facebook-square"></i></a></li>
-                    <li><a href="fhttp://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu"><i class="fas fa-rss-square">b</i></a></li>
-                    <li><a href="fhttps://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu"><i class="fab fa-twitter-square">c</i></a></li>
+                    <li><a href="https://www.facebook.com/esliceu.escola.cooperativa" alt="Logo facebook que et redirecciona cap al facebook del liceu" target="_blank">Facebook Es Liceu</a></li>
+                    <li><a href="http://www.esliceu.com/feed/" alt="Logo rss que et redirecciona cap al rss del liceu" target="_blank">RSS Es Liceu</a></li>
+                    <li><a href="https://twitter.com/EsLiceu" alt="Logo twitter que et redirecciona cap al twitter del liceu" target="_blank" >Twitter Es Liceu</a></li>
                 </ul>
             </section>
         </section>
     </footer>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-152549941-1');
+    </script>
 </body>
 
 </html>
