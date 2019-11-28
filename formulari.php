@@ -31,46 +31,23 @@ if ($varSession == null || $varSession = '') {
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/formulari.css">
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="src/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="src/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="src/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="src/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="src/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="src/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="src/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="src/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="src/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="src/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="src/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="src/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="src/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-
-    <!-- fontawesome -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- Seguiment amb google analytics -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152549941-1"></script>
+    <!-- Google Analytics -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-152549941-1');
+        window.ga = window.ga || function() {
+            (ga.q = ga.q || []).push(arguments)
+        };
+        ga.l = +new Date;
+        ga('create', 'UA-152549941-1', 'auto');
+        ga('send', 'pageview');
     </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
     <title>Compra Llibres | Gestió dels llibres</title>
 </head>
 
@@ -98,7 +75,7 @@ if ($varSession == null || $varSession = '') {
         <section id="formularis">
             <section id="form1">
                 <h2>Insereix un nou llibre: </h2>
-                <form id="formId" action="afegir.php" method="POST" onsubmit="gtag('event', 'send', { 'event_category': 'createBook', 'event_label': 'send-book', value': '0'});">
+                <form id="formId" action="afegir.php" method="POST" onsubmit="ga('send', 'event', 'form', 'submit', 'form-formulari.php');">
                     <label for="txt_Insereixtitoldelllibre" id="Insereixtitoldelllibre-ariaLabel">Insereix titol del llibre: (Obligatori)</label>
                     <input id="txt_Insereixtitoldelllibre" name="titol" type="text" aria-labelledby="Insereixtitoldelllibre-ariaLabel" title="Insereix titol del llibre: Aquest es un camp obligatori">
 
@@ -111,18 +88,17 @@ if ($varSession == null || $varSession = '') {
                     <label for="txt_Insertalaurlo" id="Insertalaurlo-ariaLabel">Inserta la url: (Obligatori)</label>
                     <input id="txt_Insertalaurlo" name="uri" type="text" aria-labelledby="Insertalaurlo-ariaLabel" title="Inserta la url. Aquest es un camp obligatori">
 
-                
+
                     <button id="contact-submit" type="submit" name="formulari" class="btn btn-success" type="submit" onClick="ga('send', 'event', { eventCategory: 'form', eventAction: 'submit', eventLabel: 'form-formulari.php', eventValue: 0});">Afegeix</button>
                 </form>
-                <input id="contact-submit2" class="button" type="submit" value="Submit" onClick="ga('send', 'event', {eventCategory: 'form',eventAction: 'click',eventLabel: 'form-formulari.php', transport: 'beacon'});">
             </section>
             <section id="form2">
                 <h2>Elimina un llibre: </h2>
                 <form action="eliminar.php" method="POST">
-                        <label for="txt_Insertaiddelproducteaeliminar" id="Insertaiddelproducteaeliminar-ariaLabel">Inserta id del producte a eliminar: (Obligatori)</label>
-                        <input id="txt_Insertaiddelproducteaeliminar" name="id_llibre" type="text" aria-labelledby="Insertaiddelproducteaeliminar-ariaLabel" title="Inserta id del producte a eliminar:. Aquest es un camp obligatori">
- 
-                        <button type="submit" name="formulari2" class="btn btn-danger">Elimina</button>
+                    <label for="txt_Insertaiddelproducteaeliminar" id="Insertaiddelproducteaeliminar-ariaLabel">Inserta id del producte a eliminar: (Obligatori)</label>
+                    <input id="txt_Insertaiddelproducteaeliminar" name="id_llibre" type="text" aria-labelledby="Insertaiddelproducteaeliminar-ariaLabel" title="Inserta id del producte a eliminar:. Aquest es un camp obligatori">
+
+                    <button type="submit" name="formulari2" class="btn btn-danger">Elimina</button>
                 </form>
             </section>
         </section>
