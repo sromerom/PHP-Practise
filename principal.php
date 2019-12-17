@@ -141,6 +141,7 @@ if ($varSession == null || $varSession = '') {
                         <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img src="<?php echo $row['uri'] ?>" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
                         <div class="under">
                             <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica ' . $row['titol'] . '</a>'; ?>
+                            <?php echo '<a href="checkout.php?id_llibre=' . $row['id_llibre'] . '">Compra el llibre!</a>'; ?>
                         </div>
                     </li>
                 <?php }
