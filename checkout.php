@@ -1,8 +1,10 @@
 <?php
-if (isset($_GET['id_llibre'])) {
-    $id_llibre = $_GET['id_llibre'];
-    echo $id_llibre;
-}
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +18,7 @@ if (isset($_GET['id_llibre'])) {
 </head>
 
 <body>
-    <?php echo '<form action="pagament.php?id_llibre=' . $id_llibre . ?>
-    <form action="pagament.php">
+
         <div id="card-element">
             <input type="text">
             <!-- Elements will create input elements here -->
@@ -27,7 +28,6 @@ if (isset($_GET['id_llibre'])) {
         <div id="card-errors" role="alert"></div>
 
         <button id="submit">Pay</button>
-    </form>
     <script>
         // Set your publishable key: remember to change this to your live publishable key in production
         // See your keys here: https://dashboard.stripe.com/account/apikeys
@@ -41,10 +41,14 @@ if (isset($_GET['id_llibre'])) {
             }
         };
 
-        var card = elements.create("card", { style: style });
+        var card = elements.create("card", {
+            style: style
+        });
         card.mount("#card-element");
 
-        card.addEventListener('change', ({ error }) => {
+        card.addEventListener('change', ({
+            error
+        }) => {
             const displayError = document.getElementById('card-errors');
             if (error) {
                 displayError.textContent = error.message;
@@ -55,30 +59,32 @@ if (isset($_GET['id_llibre'])) {
 
         var submitButton = document.getElementById('submit');
 
-        submitButton.addEventListener('click', function (ev) {
-            var response = fetch('http://www115.cfgs.esliceu.net/Exercici18-PassarelaPagament/pagament.php').then(function (response) {
-                return response.json();
-            }).then(function (responseJson) {
-                var clientSecret = responseJson.client_secret;
-                console.log(clientSecret)
-                stripe.confirmCardPayment(clientSecret, {
-                    payment_method: { card: card }
-                }).then(function (result) {
-                    if (result.error) {
-                        // Show error to your customer (e.g., insufficient funds)
-                        console.log(result.error.message);
-                    } else {
-                        // The payment has been processed!
-                        if (result.paymentIntent.status === 'succeeded') {
-                            document.querySelector("body").innerHTML = "The payment has been processed!";
-                            // Show a success message to your customer
-                            // There's a risk of the customer closing the window before callback
-                            // execution. Set up a webhook or plugin to listen for the
-                            // payment_intent.succeeded event that handles any business critical
-                            // post-payment actions.
-                        }
+        submitButton.addEventListener('click', async function(ev) {
+            const response = await fetch("http://www115.cfgs.esliceu.net/Exercici18-PassarelaPagament/pagament.php");
+            const responseJSON = await response.json();
+            const clientSecret = responseJSON.client_secret;
+            stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: 'Jenny Rosen'
                     }
-                });
+                }
+            }).then(function(result) {
+                if (result.error) {
+                    // Show error to your customer (e.g., insufficient funds)
+                    console.log(result.error.message);
+                } else {
+                    // The payment has been processed!
+                    if (result.paymentIntent.status === 'succeeded') {
+                        document.body.innerHTML += "La seva compra s'ha realitzat";
+                        // Show a success message to your customer
+                        // There's a risk of the customer closing the window before callback
+                        // execution. Set up a webhook or plugin to listen for the
+                        // payment_intent.succeeded event that handles any business critical
+                        // post-payment actions.
+                    }
+                }
             });
         });
     </script>
