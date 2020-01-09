@@ -5,7 +5,27 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
+
+// Include configuration file  
+require_once 'dataStripe.php';
+include('conexion.php');
+if (isset($_GET['id_llibre'])) {
+    $id_llibre = $_GET['id_llibre'];
+    $consulta = "SELECT * FROM llibres WHERE id_llibre =" . $id_llibre;
+    $resCon = mysqli_query($connexio, $consulta);
+    if ($resCon) {
+        $row = $resCon->fetch_assoc();
+        $itemName = $row['titol'];
+        $itemNumber = $row['id_llibre'];
+        echo $itemName;
+        echo $itemNumber;
+        //echo $row['uri'];
+    }
+}
+
+mysqli_close($connexio);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,41 +34,53 @@ error_reporting(E_ALL);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Checkout</title>
-    <script src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body>
+<form action="payment.php" method="POST" id="payment-form">
+  <div class="form-row">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
 
-        <div id="card-element">
-            <input type="text">
-            <!-- Elements will create input elements here -->
-        </div>
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+  </div>
 
-        <!-- We'll put the error messages in this element -->
-        <div id="card-errors" role="alert"></div>
-
-        <button id="submit">Pay</button>
+  <button>Submit Payment</button>
+</form>
+<script src="https://js.stripe.com/v3/"></script>
     <script>
         // Set your publishable key: remember to change this to your live publishable key in production
         // See your keys here: https://dashboard.stripe.com/account/apikeys
-        var stripe = Stripe('pk_test_5gFITSBbGBDTMXHxufwXYkcl00O3OFsPRj');
+        var stripe = Stripe('<?php echo STRIPE_PUBLISHABLE_KEY; ?>');
         var elements = stripe.elements();
 
         // Set up Stripe.js and Elements to use in checkout form
         var style = {
             base: {
-                color: "#32325d",
+                color: '#32325d',
+                lineHeight: '24px',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
             }
         };
 
-        var card = elements.create("card", {
-            style: style
-        });
+        var card = elements.create('card', {style: style});
         card.mount("#card-element");
 
-        card.addEventListener('change', ({
-            error
-        }) => {
+        card.addEventListener('change', ({error}) => {
             const displayError = document.getElementById('card-errors');
             if (error) {
                 displayError.textContent = error.message;
@@ -57,36 +89,40 @@ error_reporting(E_ALL);
             }
         });
 
-        var submitButton = document.getElementById('submit');
-
-        submitButton.addEventListener('click', async function(ev) {
-            const response = await fetch("http://www115.cfgs.esliceu.net/Exercici18-PassarelaPagament/pagament.php");
-            const responseJSON = await response.json();
-            const clientSecret = responseJSON.client_secret;
-            stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: card,
-                    billing_details: {
-                        name: 'Jenny Rosen'
-                    }
-                }
-            }).then(function(result) {
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            stripe.createToken(card).then(function(result) {
                 if (result.error) {
-                    // Show error to your customer (e.g., insufficient funds)
-                    console.log(result.error.message);
+                    // Inform the user if there was an error
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
                 } else {
-                    // The payment has been processed!
-                    if (result.paymentIntent.status === 'succeeded') {
-                        document.body.innerHTML += "La seva compra s'ha realitzat";
-                        // Show a success message to your customer
-                        // There's a risk of the customer closing the window before callback
-                        // execution. Set up a webhook or plugin to listen for the
-                        // payment_intent.succeeded event that handles any business critical
-                        // post-payment actions.
-                    }
+                    stripeTokenHandler(result.token);
                 }
             });
         });
+
+        // Send Stripe Token to Server
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            // Add Stripe Token to hidden input
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+
+            var hiddenLlibre = document.createElement('input');
+            hiddenLlibre.setAttribute('type', 'hidden');
+            hiddenLlibre.setAttribute('name', 'titolLlibre');
+            hiddenLlibre.setAttribute('value', '<?php echo $itemName; ?>');
+
+            form.appendChild(hiddenInput);
+            form.appendChild(hiddenLlibre);
+            // Submit form
+            form.submit();
+        }
     </script>
 
 </body>
