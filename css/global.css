@@ -103,3 +103,7 @@ footer {
     float: left;
     margin-left: 10px;
 }
+
+.dir {
+    color: black;
+}
