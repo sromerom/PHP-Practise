@@ -82,6 +82,9 @@ footer {
     justify-content: space-evenly;
 }
 
+.container section {
+    flex-basis: 33.33%;
+}
 .name p {
     margin: auto;
 }

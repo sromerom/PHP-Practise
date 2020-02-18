@@ -38,10 +38,12 @@ if ($varSession == null || $varSession = '') {
     <link rel="preload" as="style" href="css/principal.css">
 
     <link rel="preload" as="style" href="css/global.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/global.css"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="css/global.css"></noscript>
 
     <link rel="preload" as="style" href="css/principal.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="css/principal.css"></noscript>
+    <noscript>
+        <link rel="stylesheet" href="css/principal.css"></noscript>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -78,6 +80,8 @@ if ($varSession == null || $varSession = '') {
             $('.lazy').Lazy();
         });
     </script>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <title>Compra Llibres | Tenda virtual de llibres i Ebooks</title>
 </head>
 
@@ -161,11 +165,23 @@ if ($varSession == null || $varSession = '') {
                 $queryDefault = "SELECT * FROM llibres $despresQuery";
                 $resultatDefault = mysqli_query($connexio, $queryDefault);
                 while ($row = mysqli_fetch_array($resultatDefault)) { ?>
+                    <?php $linkActual = 'llibre.php?id_llibre=' . $row['id_llibre'] ?>
                     <li>
-                        <a href="<?php echo 'llibre.php?id_llibre=' . $row['id_llibre'] ?>"><img data-src="<?php echo $row['uri'] ?>" class="lazy" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
+                        <a href="<?php echo $linkActual ?>"><img data-src="<?php echo $row['uri'] ?>" class="lazy" alt="Aquest llibre que no es visualitza correctament és <?php echo $row['titol']; ?> "></a>
                         <div class="under">
                             <?php echo '<a href="formModificar.php?id_llibre=' . $row['id_llibre'] . '">Modifica ' . $row['titol'] . '</a>'; ?>
                             <?php echo '<a href="checkout.php?id_llibre=' . $row['id_llibre'] . '">Compra el llibre!</a>'; ?>
+                            <?php echo '<a class="twitter-share-button"
+                                href="https://twitter.com/intent/tweet"
+                                data-size="large"
+                                data-text="El llibre ' . $row['titol'] . ' es una passada!!"
+                                data-url="http://www115.cfgs.esliceu.net/' . $linkActual . '"
+                                data-hashtags="llibre,EsLiceu,#' . $row['autor'] . '"
+                                data-via="twitterdev"
+                                data-related="twitterapi,twitter">
+                                Comparteix!!
+                                </a>';
+                            ?>
                         </div>
                     </li>
                 <?php }
@@ -188,6 +204,10 @@ if ($varSession == null || $varSession = '') {
                     <li><a href="http://www.esliceu.com/feed/" rel="noopener" alt="Logo rss que et redirecciona cap al rss del liceu" target="_blank">RSS Es Liceu</a></li>
                     <li><a href="https://twitter.com/EsLiceu" rel="noopener" alt="Logo twitter que et redirecciona cap al twitter del liceu" target="_blank">Twitter Es Liceu</a></li>
                 </ul>
+            </section>
+            <section>
+                <a class="twitter-timeline" data-lang="es" data-width="400" data-height="300" href="https://twitter.com/EsLiceu?ref_src=twsrc%5Etfw">Tweets by EsLiceu</a>
+                <a href="https://twitter.com/EsLiceu?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @EsLiceu</a>
             </section>
         </section>
     </footer>
